@@ -789,7 +789,7 @@ Loop:
 						cfg.hd.ReportBadHeaderPoS(header.Hash(), header.ParentHash)
 					}
 					if cfg.badBlockHalt {
-						return errw
+						return err
 					}
 					if errors.Is(err, consensus.ErrInvalidBlock) {
 						if err := u.UnwindTo(blockNum-1, BadBlock(header.Hash(), err), applyTx); err != nil {
