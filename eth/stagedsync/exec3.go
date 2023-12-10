@@ -766,6 +766,7 @@ Loop:
 					if txTask.Error != nil {
 						return fmt.Errorf("%w: %v", consensus.ErrInvalidBlock, txTask.Error) //same as in stage_exec.go
 					}
+					fmt.Printf("----- GasUsed: %d %d\n", txTask.TxIndex, txTask.UsedGas)
 					gasUsed += txTask.UsedGas
 					if txTask.Tx != nil {
 						blobGasUsed += txTask.Tx.GetBlobGas()
