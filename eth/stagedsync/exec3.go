@@ -757,7 +757,7 @@ Loop:
 				if txTask.Error != nil {
 					break Loop
 				}
-				fmt.Printf("----- TxNum %d ----- \n", txTask.TxNum)
+				fmt.Printf("----- txIdx %d ----- \n", txTask.TxIndex)
 				applyWorker.RunTxTaskNoLock(txTask)
 				if err := func() error {
 					if errors.Is(txTask.Error, context.Canceled) {
@@ -789,7 +789,7 @@ Loop:
 						cfg.hd.ReportBadHeaderPoS(header.Hash(), header.ParentHash)
 					}
 					if cfg.badBlockHalt {
-						return err
+						return errw
 					}
 					if errors.Is(err, consensus.ErrInvalidBlock) {
 						if err := u.UnwindTo(blockNum-1, BadBlock(header.Hash(), err), applyTx); err != nil {
