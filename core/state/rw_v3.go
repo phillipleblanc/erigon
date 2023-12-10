@@ -463,8 +463,8 @@ type StateWriterV3 struct {
 
 func NewStateWriterV3(rs *StateV3) *StateWriterV3 {
 	return &StateWriterV3{
-		rs: rs,
-		//trace:      true,
+		rs:    rs,
+		trace: true,
 	}
 }
 
