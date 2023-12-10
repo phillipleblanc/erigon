@@ -1208,6 +1208,7 @@ func (api *TraceAPIImpl) doCallMany(ctx context.Context, dbtx kv.Tx, msgs []type
 		} else {
 			ibs.SetTxContext(libcommon.Hash{}, header.Hash(), txIndex)
 		}
+		ibs.SetTrace(true)
 		execResult, err = core.ApplyMessage(evm, msg, gp, true /* refunds */, gasBailout /* gasBailout */)
 		if err != nil {
 			return nil, nil, fmt.Errorf("first run for txIndex %d error: %w", txIndex, err)
