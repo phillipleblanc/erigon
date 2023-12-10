@@ -720,7 +720,8 @@ func (d *Domain) Close() {
 
 func (dc *DomainContext) PutWithPrev(key1, key2, val, preval []byte) error {
 	// This call to update needs to happen before d.tx.Put() later, because otherwise the content of `preval`` slice is invalidated
-	if tracePutWithPrev == dc.d.filenameBase {
+	//if tracePutWithPrev == dc.d.filenameBase {
+	if bytes.Equal(key1, common.FromHex("f0abd848370e3d4cea8d8c5d8fba8cbe8c70f60428e4aeb9f053bf9811da075a5635324832305635315a4d34322035314834335635324834325635315a4d3433")) {
 		fmt.Printf("PutWithPrev(%s, tx %d, key[%x][%x] value[%x] preval[%x])\n", dc.d.filenameBase, dc.hc.ic.txNum, key1, key2, val, preval)
 	}
 	if err := dc.hc.AddPrevValue(key1, key2, preval); err != nil {
@@ -731,7 +732,8 @@ func (dc *DomainContext) PutWithPrev(key1, key2, val, preval []byte) error {
 
 func (dc *DomainContext) DeleteWithPrev(key1, key2, prev []byte) (err error) {
 	// This call to update needs to happen before d.tx.Delete() later, because otherwise the content of `original`` slice is invalidated
-	if tracePutWithPrev == dc.d.filenameBase {
+	//if tracePutWithPrev == dc.d.filenameBase {
+	if bytes.Equal(key1, common.FromHex("f0abd848370e3d4cea8d8c5d8fba8cbe8c70f60428e4aeb9f053bf9811da075a5635324832305635315a4d34322035314834335635324834325635315a4d3433")) {
 		fmt.Printf("DeleteWithPrev(%s, tx %d, key[%x][%x] preval[%x])\n", dc.d.filenameBase, dc.hc.ic.txNum, key1, key2, prev)
 	}
 	if err := dc.hc.AddPrevValue(key1, key2, prev); err != nil {
