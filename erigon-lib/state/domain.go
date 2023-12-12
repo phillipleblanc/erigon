@@ -82,7 +82,7 @@ var (
 
 // StepsInColdFile - files of this size are completely frozen/immutable.
 // files of smaller size are also immutable, but can be removed after merge to bigger files.
-const StepsInColdFile = 32
+const StepsInColdFile = 64
 
 var (
 	asserts          = dbg.EnvBool("AGG_ASSERTS", false)
@@ -2328,20 +2328,20 @@ type SelectedStaticFiles struct {
 	commitment     []*filesItem
 	commitmentIdx  []*filesItem
 	commitmentHist []*filesItem
-	codeI          int
-	storageI       int
-	accountsI      int
-	commitmentI    int
+	//codeI          int
+	//storageI       int
+	//accountsI      int
+	//commitmentI    int
 }
 
-func (sf SelectedStaticFiles) FillV3(s *SelectedStaticFilesV3) SelectedStaticFiles {
-	sf.accounts, sf.accountsIdx, sf.accountsHist = s.accounts, s.accountsIdx, s.accountsHist
-	sf.storage, sf.storageIdx, sf.storageHist = s.storage, s.storageIdx, s.storageHist
-	sf.code, sf.codeIdx, sf.codeHist = s.code, s.codeIdx, s.codeHist
-	sf.commitment, sf.commitmentIdx, sf.commitmentHist = s.commitment, s.commitmentIdx, s.commitmentHist
-	sf.codeI, sf.accountsI, sf.storageI, sf.commitmentI = s.codeI, s.accountsI, s.storageI, s.commitmentI
-	return sf
-}
+//func (sf SelectedStaticFiles) FillV3(s *SelectedStaticFilesV3) SelectedStaticFiles {
+//	sf.accounts, sf.accountsIdx, sf.accountsHist = s.accounts, s.accountsIdx, s.accountsHist
+//	sf.storage, sf.storageIdx, sf.storageHist = s.storage, s.storageIdx, s.storageHist
+//	sf.code, sf.codeIdx, sf.codeHist = s.code, s.codeIdx, s.codeHist
+//	sf.commitment, sf.commitmentIdx, sf.commitmentHist = s.commitment, s.commitmentIdx, s.commitmentHist
+//	sf.codeI, sf.accountsI, sf.storageI, sf.commitmentI = s.codeI, s.accountsI, s.storageI, s.commitmentI
+//	return sf
+//}
 
 func (sf SelectedStaticFiles) Close() {
 	for _, group := range [][]*filesItem{
