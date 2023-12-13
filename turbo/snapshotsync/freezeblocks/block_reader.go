@@ -565,12 +565,12 @@ func (r *BlockReader) headerFromSnapshot(blockHeight uint64, sn *HeaderSegment, 
 	gg := sn.seg.MakeGetter()
 	gg.Reset(headerOffset)
 	if !gg.HasNext() {
-		log.Warn("[dbg] headerFromSnapshot1", "blockHeight", blockHeight)
+		log.Warn("[dbg] headerFromSnapshot2", "blockHeight", blockHeight)
 		return nil, buf, nil
 	}
 	buf, _ = gg.Next(buf[:0])
 	if len(buf) == 0 {
-		log.Warn("[dbg] headerFromSnapshot1", "blockHeight", blockHeight)
+		log.Warn("[dbg] headerFromSnapshot3", "blockHeight", blockHeight)
 		return nil, buf, nil
 	}
 	h := &types.Header{}

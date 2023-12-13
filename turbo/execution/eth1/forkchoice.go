@@ -192,11 +192,12 @@ func (e *EthereumExecutionModule) updateForkChoice(ctx context.Context, blockHas
 		})
 		currentHeader, err := e.blockReader.Header(ctx, tx, currentParentHash, currentParentNumber)
 		if err != nil {
+			log.Warn("[dbg] forkChoice21", "err", err, "currentParentNumber", currentParentNumber, "currentParentHash", currentParentHash)
 			sendForkchoiceErrorWithoutWaiting(outcomeCh, err)
 			return
 		}
 		if currentHeader == nil {
-			log.Warn("[dbg] forkChoice2", "currentParentNumber", currentParentNumber, "currentParentHash", currentParentHash)
+			log.Warn("[dbg] forkChoice22", "currentParentNumber", currentParentNumber, "currentParentHash", currentParentHash)
 			sendForkchoiceReceiptWithoutWaiting(outcomeCh, &execution.ForkChoiceReceipt{
 				LatestValidHash: gointerfaces.ConvertHashToH256(libcommon.Hash{}),
 				Status:          execution.ExecutionStatus_MissingSegment,
