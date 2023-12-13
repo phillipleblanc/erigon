@@ -242,6 +242,7 @@ func (rw *Worker) RunTxTaskNoLock(txTask *state.TxTask) {
 		rw.callTracer.Reset()
 		rw.vmCfg.SkipAnalysis = txTask.SkipAnalysis
 		ibs.SetTxContext(txHash, txTask.BlockHash, txTask.TxIndex)
+		ibs.SetTrace(true)
 		msg := txTask.TxAsMessage
 
 		//logconfig := &logger.LogConfig{

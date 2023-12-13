@@ -757,6 +757,7 @@ Loop:
 				if txTask.Error != nil {
 					break Loop
 				}
+				fmt.Printf("------- txIdx %d ----\n", txTask.TxIndex)
 				applyWorker.RunTxTaskNoLock(txTask)
 				if err := func() error {
 					if errors.Is(txTask.Error, context.Canceled) {
@@ -805,6 +806,7 @@ Loop:
 				if err := rs.ApplyState4(ctx, txTask); err != nil {
 					return err
 				}
+				fmt.Printf("------- GasUsed %d, %d ----\n", txTask.UsedGas, txTask.TxIndex)
 
 				execTriggers.AddInt(rs.CommitTxNum(txTask.Sender, txTask.TxNum, in))
 				outputTxNum.Add(1)

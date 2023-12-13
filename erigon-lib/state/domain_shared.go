@@ -283,6 +283,9 @@ func (sd *SharedDomains) put(table kv.Domain, key string, val []byte) {
 		}
 		sd.code[key] = val
 	case kv.StorageDomain:
+		if bytes.Equal([]byte(key), common.FromHex("f0abd848370e3d4cea8d8c5d8fba8cbe8c70f60428e4aeb9f053bf9811da075a5635324832305635315a4d34322035314834335635324834325635315a4d3433")) {
+			fmt.Printf("puts: %x, %x\n", key, val)
+		}
 		if old, ok := sd.storage.Set(key, val); ok {
 			sd.estSize += len(val) - len(old)
 		} else {
