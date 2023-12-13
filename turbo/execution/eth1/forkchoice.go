@@ -238,13 +238,14 @@ func (e *EthereumExecutionModule) updateForkChoice(ctx context.Context, blockHas
 		}
 	}
 
-	log.Warn("[dbg] forkChoice2", "headersProgressBefore", headersProgressBefore, "finishProgressBefore", finishProgressBefore)
+	log.Warn("[dbg] forkChoice4", "headersProgressBefore", headersProgressBefore, "finishProgressBefore", finishProgressBefore)
 	// Run the unwind
 	if err := e.executionPipeline.RunUnwind(e.db, tx); err != nil {
 		err = fmt.Errorf("updateForkChoice: %w", err)
 		sendForkchoiceErrorWithoutWaiting(outcomeCh, err)
 		return
 	}
+	log.Warn("[dbg] forkChoice5", "headersProgressBefore", headersProgressBefore, "finishProgressBefore", finishProgressBefore)
 
 	// Truncate tx nums
 	if e.historyV3 {
