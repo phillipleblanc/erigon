@@ -887,6 +887,18 @@ func (sd *SharedDomains) DomainDelPrefix(domain kv.Domain, prefix []byte) error 
 			return err
 		}
 	}
+
+	//assert
+	cnt := 0
+	if err := sd.IterateStoragePrefix(prefix, func(k, v []byte) error {
+		cnt++
+		return nil
+	}); err != nil {
+		return err
+	}
+	if cnt != 0 {
+		panic(fmt.Sprintf("not all storage was deleted: %d, %x", cnt, prefix))
+	}
 	return nil
 }
 func (sd *SharedDomains) Tx() kv.Tx { return sd.roTx }
